@@ -44,3 +44,12 @@ function calcolaAnniAllaPensione(annoNascita, annoCorrente, tipoDiLavoro) {
 
 // # Le prove: una riga di console.log per ogni caso di "Come verifichi"
 
+console.log(trovaEtaPensione("ordinario"));
+console.log(trovaEtaPensione("usurante"));
+
+console.log(calcolaAnniAllaPensione(2000, 2026, "ordinario"));
+console.log(calcolaAnniAllaPensione(2000, 2026, "usurante"));
+console.log(calcolaAnniAllaPensione(2000, 2027, "ordinario"));
+console.log(calcolaAnniAllaPensione(1960, 2026, "ordinario"));
+console.log(calcolaAnniAllaPensione(1964, 2026, "usurante"));
+console.log(calcolaAnniAllaPensione(1950, 2026, "ordinario"));

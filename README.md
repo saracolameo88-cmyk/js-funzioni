@@ -1,10 +1,10 @@
 # js-funzioni
 
-Esercizio da fare da soli, anche per il tutoraggio di mercoledì 25/11. Ripassi gli argomenti di sabato 21/11: dichiarare e invocare una funzione, parametri e argomenti, `return`, il controllo dell'input con un `return` anticipato, una funzione che ne usa un'altra. Servono anche le condizioni, i cicli e gli array delle lezioni prima.
+Esercizio da fare da soli, anche per il tutoraggio di mercoledì 25/11. Le tracce 01-10 ripassano gli argomenti di sabato 21/11: dichiarare e invocare una funzione, parametri e argomenti, `return`, il controllo dell'input con un `return` anticipato, una funzione che ne usa un'altra. Le tracce 11-15 quelli di martedì 24/11: le arrow function, il return implicito e lo scope, cioè dove una variabile si vede e dove no. Servono anche le condizioni, i cicli e gli array delle lezioni prima.
 
 ## Cosa devi fare
 
-Dieci tracce, ordinate dalla più facile alla più difficile. Ogni traccia è una funzione (o due) legata a una situazione vera: una spedizione, l'ufficio cambi in aeroporto, la pagella, il taxi di notte…
+Quindici tracce in due gruppi: dieci sulle funzioni, ordinate dalla più facile alla più difficile, e cinque su arrow function e scope. Ogni traccia è una funzione (o due) legata a una situazione vera: una spedizione, l'ufficio cambi in aeroporto, la pagella, il taxi di notte…
 
 Alcune le hai viste in aula sabato, in una versione diversa. Qui c'è sempre qualcosa in più: una commissione, un giudizio in più, l'italiano giusto per "1 ora". Prova a scriverle senza guardare gli appunti.
 
@@ -16,12 +16,13 @@ Ogni traccia ha la sua pagina HTML e il suo file JavaScript, già collegati. **S
 - Apri la pagina della traccia con **doppio clic** sul file `.html`, dalla cartella del progetto. Se si apre un browser diverso da Chrome: tasto destro sul file, **Apri con** e scegli Google Chrome.
 - **Console sempre aperta**: F12, scheda Console. Su Mac Cmd+Opt+J.
 - Dopo ogni modifica salva il file e premi **F5** nella pagina.
-- Scrivi le funzioni con la keyword `function`, come a lezione. Le arrow function arrivano martedì 24/11: in questo esercizio non servono.
+- Tracce 01-10: scrivi le funzioni con la keyword `function`, come sabato. Tracce 11-15: arrow function, come martedì. I metodi degli array (`forEach`, `map`…) non servono: sugli array solo il ciclo `for`.
 
 ## Cosa trovi qui
 
 ```
 ├── 01-spedizione.html … 10-taxi.html     ← una pagina per traccia: si apre con doppio clic
+├── 11-freccia-corriere.html … 15-iva-globale.html  ← arrow function e scope
 ├── bonus-1-bisestile.html, bonus-2-taxi-prompt.html
 ├── js/
 │   ├── 01-spedizione.js                  ← qui scrivi il codice della traccia 1
@@ -34,7 +35,7 @@ Ogni traccia ha la sua pagina HTML e il suo file JavaScript, già collegati. **S
 
 ## Come lavori su ogni traccia
 
-Ogni file `.js` contiene solo lo scheletro dei commenti. Dentro:
+Ogni file `.js` contiene lo scheletro dei commenti (le tracce 11, 14 e 15 anche del codice di partenza, già scritto). Dentro:
 
 1. **Rispondi alle quattro domande** per ogni funzione: come si chiama? Di quali dati ha bisogno? Deve restituire qualcosa? Di che tipo? Il nome è già scritto nella traccia; i parametri, invece, li scegli tu, con nomi parlanti in italiano.
 2. **Scrivi gli STEPS** della funzione: i passi in italiano, uno per riga, prima del codice.
@@ -262,9 +263,118 @@ Una funzione `verifica…` restituisce un booleano: puoi usarla direttamente com
 
 ---
 
+## Arrow function e scope
+
+Le tracce di martedì 24/11. Le arrow function stanno in una `const`, si invocano come le altre e si scrivono **prima** di invocarle. Le quattro domande e gli STEPS valgono anche qui.
+
+### 11 · Dal function alla freccia
+
+*Stessa funzione, scritta in un altro modo.*
+
+- **Obiettivo**: nel file `js/11-freccia-corriere.js` c'è già `calcolaCostoSpedizione`, scritta con `function`: 5 € fissi, 2 € per ogni kg e 10 centesimi per ogni km, e 0 se il peso non è valido. Riscrivila come arrow function, **con lo stesso nome**. Prima scrivi negli STEPS i passaggi che fai per trasformarla. Quando la nuova versione funziona, cancella quella con `function`.
+- **Come verifichi**:
+  - 3 kg, 100 km → 21;
+  - 0.5 kg, 20 km → 8;
+  - 0 kg, 50 km → 0, e anche -2 kg → 0;
+  - finché nel file ci sono tutte e due le versioni, la pagina non stampa niente e in console c'è `SyntaxError: Identifier 'calcolaCostoSpedizione' has already been declared`. Perché?
+  - sposta una delle prove **sopra** la arrow function: esce `ReferenceError: Cannot access 'calcolaCostoSpedizione' before initialization`. Con la versione `function` invece funzionava. Poi rimettila sotto.
+
+<details>
+<summary>Suggerimento</summary>
+
+Tre passi: togli `function`, metti la funzione in una `const` con `=`, scrivi la freccia `=>` tra le tonde e le graffe. Dentro c'è un `if` e ci sono più righe: graffe e `return` restano. Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#arrow), capitolo "Da function alla freccia", e capitolo "Prima la scrivi, poi la invochi".
+
+</details>
+
+### 12 · Una riga sola
+
+*Il return implicito.*
+
+- **Obiettivo**: scrivi quattro arrow function, **una riga ciascuna**, senza graffe e senza `return`:
+  - `calcolaPrezzoConIva`: riceve il prezzo netto e restituisce il prezzo con l'IVA al 22%;
+  - `calcolaAreaRettangolo`: riceve base e altezza e restituisce l'area;
+  - `verificaNumeroPari`: riceve un numero e restituisce `true` se è pari, `false` se no;
+  - `convertiCelsiusInFahrenheit`: riceve i gradi Celsius e restituisce i gradi Fahrenheit. La formula: moltiplichi per 9, dividi per 5, aggiungi 32.
+- **Come verifichi**:
+  - `calcolaPrezzoConIva`: 10 → 12.2, 100 → 122, 0 → 0;
+  - `calcolaAreaRettangolo`: 4 e 5 → 20, 2.5 e 2 → 5;
+  - `verificaNumeroPari`: 4 → `true`, 7 → `false`, 0 → `true`;
+  - `convertiCelsiusInFahrenheit`: 0 → 32, 100 → 212, 20 → 68, -40 → -40;
+  - ora riscrivi `calcolaPrezzoConIva` **con** le graffe ma senza `return` e prova di nuovo con 10: esce `undefined`. Perché? Poi rimettila com'era.
+
+<details>
+<summary>Suggerimento</summary>
+
+Dopo la freccia scrivi solo il valore da restituire: per `verificaNumeroPari` è un confronto, che vale già `true` o `false`, quindi non serve un `if`. Il pari e dispari si fa con `%`. Con le graffe il `return` si scrive, senza graffe c'è già. Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#implicito), capitolo "Il return implicito".
+
+</details>
+
+### 13 · Un parametro solo
+
+*Le tonde che si possono togliere, e quelle che no.*
+
+- **Obiettivo**: scrivi tre arrow function con un parametro solo:
+  - `calcolaMancia`: riceve il totale del conto e restituisce il 10%. Scrivila **senza** le tonde intorno al parametro;
+  - `formattaPrezzo`: riceve un prezzo in euro e restituisce il testo con due decimali e il simbolo dell'euro, per esempio `4.50 €`;
+  - `verificaMaggiorenne`: riceve l'età e restituisce `true` da 18 anni in su.
+  
+  Le ultime due scrivile con le tonde, come a lezione.
+- **Come verifichi**:
+  - `calcolaMancia`: 20 → 2, 45 → 4.5;
+  - `formattaPrezzo`: 4.5 → `4.50 €`, 12 → `12.00 €`, 0.7 → `0.70 €`;
+  - `formattaPrezzo(calcolaMancia(45))` → `4.50 €`: il valore restituito da una funzione fa da argomento all'altra;
+  - `verificaMaggiorenne`: 17 → `false`, 18 → `true`, 40 → `true`;
+  - in un file a parte, o in console, prova a togliere le tonde a una funzione con **due** parametri, `const dividiConto = totaleConto, numeroPersone => totaleConto / numeroPersone;`, e a una **senza** parametri, `const stampaSaluto = => 'Ciao';`. Che errori escono? Quando le tonde si possono togliere?
+
+<details>
+<summary>Suggerimento</summary>
+
+Con un parametro solo `totaleConto => …` e `(totaleConto) => …` sono la stessa cosa. Con zero o due parametri le tonde servono sempre: per questo a lezione le teniamo sempre. Per i due decimali c'è `.toFixed(2)`, che hai già usato. Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#arrow), parte "I parametri".
+
+</details>
+
+### 14 · Dentro o fuori
+
+*Lo scope: dove si vede una variabile.*
+
+- **Obiettivo**: il file `js/14-dentro-fuori.js` ha due parti.
+  - **Parte 1**: un programma già scritto, con sei `console.log` commentati in fondo. Prima di eseguirli scrivi nel commento accanto a ognuno cosa ti aspetti: un valore (quale?) o un errore (quale?). Poi decommentali **uno alla volta**, perché dopo un errore il programma si ferma, e confronta con quello che avevi scritto.
+  - **Parte 2**: `calcolaTotaleSettimana` deve restituire la somma delle spese di una settimana, ma si ferma con un errore. Trova il guasto e correggilo spostando una riga.
+- **Come verifichi**:
+  - parte 1: due righe stampano un valore e quattro danno `ReferenceError: … is not defined`. Per ogni errore sai dire dove era nata quella variabile?
+  - parte 2, prima della correzione: `ReferenceError: totaleSettimana is not defined`;
+  - parte 2, dopo: `[12, 8.5, 20]` → 40.5, `[5]` → 5, `[]` → 0.
+
+<details>
+<summary>Suggerimento</summary>
+
+Per ogni variabile cerca la riga in cui è dichiarata e le graffe che la contengono: una funzione, un `for` o un `if`. Fuori da quelle graffe non esiste. Anche i parametri vivono solo dentro la loro funzione. Per la parte 2: dove va dichiarato l'accumulatore, per usarlo dopo il ciclo? Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#funzione), capitoli "Il function scope" e "Il block scope".
+
+</details>
+
+### 15 · L'IVA che cambia
+
+*La variabile globale e il parametro.*
+
+- **Obiettivo**: nel file `js/15-iva-globale.js` la arrow function `calcolaPrezzoFinale` usa una variabile globale, `percentualeIva`, che a metà programma cambia. Prima di aprire la pagina, prevedi cosa stampano le due righe uguali. Poi rendi la funzione **indipendente**: la percentuale entra come secondo parametro, sempre con il return implicito. Modifica la funzione che c'è, non scriverne una seconda con lo stesso nome (ricordi l'errore della traccia 11?). Lascia nel file le righe della globale finché non hai fatto tutte le prove, poi cancellale.
+- **Come verifichi**:
+  - il programma di partenza stampa 122 e poi 104, con la stessa invocazione. Perché?
+  - nuova versione: 100 al 22% → 122, 100 al 4% → 104, 50 al 10% → 55, 80 allo 0% → 80;
+  - se il parametro si chiama anch'esso `percentualeIva` e lasci la globale nel file, `calcolaPrezzoFinale(100, 22)` dà sempre 122, qualunque valore abbia la globale. Perché?
+  - prova `calcolaPrezzoFinale(100)`, senza percentuale: esce `NaN`. Sai dire perché?
+
+<details>
+<summary>Suggerimento</summary>
+
+Una funzione indipendente riceve i dati come parametri e non legge le variabili di fuori. Se dentro la funzione c'è un parametro con lo stesso nome di una globale, vince il parametro: è il nome più vicino. Un parametro senza argomento vale `undefined`, e un conto con `undefined` dà `NaN`. Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#globali), capitoli "Le variabili globali sono pericolose" e "Lo stesso nome dentro e fuori".
+
+</details>
+
+---
+
 ## Bonus (facoltativi)
 
-Solo se hai finito le dieci tracce. Stesse regole: quattro domande, STEPS, doppio clic.
+Solo se hai finito le tracce. Stesse regole: quattro domande, STEPS, doppio clic.
 
 ### Bonus 1 · Febbraio bisestile
 
@@ -301,11 +411,27 @@ Solo se hai finito le dieci tracce. Stesse regole: quattro domande, STEPS, doppi
 
 </details>
 
+### Bonus 3 · Le tue tracce con la freccia
+
+- **Obiettivo**: riprendi le tracce 01-10 che hai già fatto con `function` e riscrivi le funzioni come arrow function, nei loro file. Prima fai un commit: la versione con `function` resta nella storia di git. Dove la funzione restituisce solo un valore, usa il return implicito.
+- **Come verifichi**:
+  - le prove di ogni traccia danno gli stessi risultati di prima;
+  - almeno due funzioni delle dieci si possono scrivere su una riga sola, con il return implicito. Quali? E perché le altre no?
+  - nelle tracce 09 e 10 una funzione ne usa un'altra: le prove restano **sotto** tutte e due le funzioni.
+
+<details>
+<summary>Suggerimento</summary>
+
+Il return implicito va bene quando dentro la funzione c'è solo `return` di un'espressione: un calcolo o un confronto. Con un `if`, un array o un `for` dentro servono graffe e `return`. Una arrow function che ne usa un'altra funziona se, al momento dell'invocazione, tutte e due sono già state scritte. Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function#implicito).
+
+</details>
+
 ---
 
 ## Per ripassare
 
 - Dispensa [Funzioni](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-funzioni), con la pagina della lezione [Funzioni in pratica](https://kb-aiwd.andreadev237.workers.dev/materiali/2026-11-21/funzioni-in-pratica).
+- Dispensa [Scope e arrow function](https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function), con la pagina della lezione [Scope e arrow function in pratica](https://kb-aiwd.andreadev237.workers.dev/materiali/2026-11-24/arrow-in-pratica).
 - Quando una funzione restituisce qualcosa di strano, stampa con `console.log` i parametri all'inizio della funzione: sono arrivati i valori giusti, nell'ordine giusto?
 
 Se usi l'AI, il file `AGENTS.md` la fa lavorare da tutor: ti fa domande e ti indica dove guardare, senza darti la soluzione.

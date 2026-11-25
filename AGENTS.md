@@ -88,7 +88,7 @@ Se nella cartella dell'esercizio c'è `TUTOR.md`, leggilo all'inizio della conve
 L'elenco aggiornato è qui: https://kb-aiwd.andreadev237.workers.dev/tutor/argomenti.md
 Leggilo all'inizio della conversazione. Se non riesci a leggerlo, usa la copia qui sotto, che potrebbe essere un po' indietro.
 
-Aggiornato al 21/11/2026.
+Aggiornato al 25/11/2026.
 
 ### Lezioni fatte: puoi usare solo questi argomenti
 
@@ -354,11 +354,30 @@ Aggiornato al 21/11/2026.
 - le dieci tracce della scheda sono assegnate nel repo js-funzioni, quelle fatte in aula in una versione diversa: non dare soluzioni, solo domande e suggerimenti
 - non ancora visti: arrow function, switch, operatore ternario, new Date (le tracce che li suggeriscono si risolvono con if e array)
 
+#### 24/11/2026 · 242 - JS Arrow functions
+- dispensa: https://kb-aiwd.andreadev237.workers.dev/lezioni/js-arrow-function
+- scope (ambito di visibilità): la parte di codice in cui una variabile si può usare
+- variabile globale: dichiarata fuori da tutto, si vede ovunque, anche dentro le funzioni; leggere una costante che non cambia va bene, i dati che cambiano entrano come parametri
+- function scope: variabili e parametri dichiarati dentro una funzione vivono solo lì; da fuori ReferenceError: ... is not defined; esce solo il valore del return
+- le globali sono pericolose: una funzione che legge una globale cambia risultato se qualcuno la modifica altrove (calcolaPrezzoStudenti con percentualeScontoDelGiorno); una funzione indipendente dipende solo dai suoi parametri
+- stesso nome dentro e fuori: sono due variabili diverse, dentro la funzione vince il parametro (il nome più vicino); con il parametro senza argomento vale undefined e non legge la globale
+- block scope: let e const dichiarate tra le graffe di if e for restano lì; l'accumulatore si dichiara prima del for per usarlo dopo; la i del for dopo il ciclo non esiste (ReferenceError: i is not defined)
+- var: ignora il block scope (esce dalle graffe di if e for) ma non il function scope; una variabile assegnata senza let né const diventa globale senza avvisare; da riconoscere, non da usare
+- arrow function: const nomeFunzione = (parametri) => { ... }; si invoca come una funzione normale
+- con un solo parametro le tonde sono facoltative (nomeCliente => ...), nel corso le scriviamo sempre; con zero o due parametri servono
+- return implicito: senza graffe il valore dopo la freccia viene restituito da solo (const dividiConto = (totaleConto, numeroPersone) => totaleConto / numeroPersone); con le graffe il return va scritto, altrimenti la funzione restituisce undefined
+- una arrow function sta in una const e non si può invocare prima della riga in cui è scritta: ReferenceError: Cannot access '...' before initialization (con function invece si poteva, hoisting)
+- una function e una const con lo stesso nome nello stesso file: SyntaxError: Identifier '...' has already been declared, il file non parte
+- le funzioni di sabato riscritte come arrow function: stampaIntestazione, salutaCliente, calcolaPrezzoScontato, calcolaTotale(prezziScontrino), calcolaPrezzoMedio che usa calcolaTotale
+- verificaPresenza(elencoValori, valoreCercato): includes scritto a mano con un segnalino a false; con !valoreTrovato && nella condizione del for il ciclo si ferma appena lo trova
+- nessun esercizio assegnato in aula per questa lezione
+- non ancora visti: metodi degli array (forEach, map, filter, find, some, every: giovedì 26/11), DOM, oggetti, switch, operatore ternario
+
 ### Prossime lezioni: argomenti NON ancora fatti
 
-- 24/11/2026 · 242 - JS Arrow functions
 - 26/11/2026 · JS - Aray Methods
 - 28/11/2026 · 236 - JS Manipolazione del DOM 1
 - 28/11/2026 · 236B - JS Manipolazione del DOM 2
 - 01/12/2026 · 244 - JS Objects 1
+- 03/12/2026 · 213 - JS Objects 2 + DOM + Local storage
 <!-- tutor:argomenti:fine -->
